@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<head>
+
+  <title>Nitrogen Math</title>
+  <link rel="icon" href="icon.png">
+  <meta content="Art Class" property="og:title" />
+  <meta content='Art Class is the #1 site for all-in-one school entertainment. Accelerate your "learning" with our collection of games, apps, emulators, proxies, and so much more.' property="og:description" />
+  <meta content="icon.png" property="og:image" />
+  <meta content="#2b2d31" data-react-helmet="true" name="theme-color" />
+
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/navbar.css" />
+  <link rel="stylesheet" href="https://unpkg.com/movement.css/movement.css">
+  <link rel="stylesheet" href="styles/hover.css" />
+
+  <script src="https://kit.fontawesome.com/e897e5d5dc.js" crossorigin="anonymous"></script>
+  
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="js/main.js"></script>
+  <div id="particles-js"></div>
+  <script src="js/particles.min.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/uv.js"></script>
+  <script src="data/splashtexts.js"></script>
+  <script src="data/hovereffects.js"></script>
+
+  <div id="navbar"></div>
+
+  <div class="btngroup">
+    <div>
+      <h1>Nitrogen Math</h1>
+      <input id="input" class="input" placeholder="&#xf002; Browse Now">
+      <br>
+    </div>
+<iframe id="prxy"></iframe>
+  </div>
+  <footer>Powered By Artclass</footer>
+<script>
+        const frame = document.getElementById("prxy")
+        const div = document.getElementById("what")
+        frame.style.display = "none"
+        const input = document.getElementById("input");
+        input.addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                div.style.display = 'none'
+                frame.style.display = 'block'
+                navigator.serviceWorker.register('./loadsw.js', {
+                    scope: __uv$config.prefix
+                }).then(() => {
+                    document.querySelector("#prxy").src = __uv$config.prefix + __uv$config.encodeUrl(search(input.value,));
+                });
+
+            }
+        });
+    </script>
+
+  <script src="./uv/uv.bundle.js"></script>
+  <script src="./uv/uv.config.js"></script>
+  <script src="js/cloak.js"></script>
+  
+  
+  <script>
+    registerSW()
+    if (window.parent.window.location.href == "about:blank") document.getElementById("blankbtn").remove()
+
+    function blank() {
+      const tab = window.open('about:blank', '_blank');
+      const iframe = tab.document.createElement('iframe');
+      const stl = iframe.style;
+      stl.border = stl.outline = 'none';
+      stl.width = '100vw';
+      stl.height = '100vh';
+      stl.position = 'fixed';
+      stl.left = stl.right = stl.top = stl.bottom = '0';
+      iframe.src = self.location;
+      tab.document.body.appendChild(iframe);
+      //window.parent.window.location.replace('https://classroom.google.com')
+    }
+
+    document.querySelector("#splashtext").innerHTML = splashtexts[Math.floor(Math.random() * splashtexts.length)];
+
+    var homebtns = document.querySelectorAll(".homebutton");
+    homebtns.forEach(btn => {
+      btn.classList.add(`hvr-${effects[Math.floor(Math.random() * effects.length)]}`)
+    })
+  </script>
+</body>
